@@ -40,21 +40,27 @@ $('#add-form').on('submit', function(event) {
 })
 // when user clicks on button invoke this function
 $('#list').on('click', '.complete-button', function(event) {
-  var item = $(event.target).parent();
-	isItemCompleted = item.hasClass('completed')
-	var itemId = item.attr('data-id')
-	var updateRequest = $.ajax({
-  		type: 'PUT',
-  		url: "https://listalous.herokuapp.com/lists/thisisareallist/items/" + itemId,
-  		data: { completed: !isItemCompleted }
-		})
-	
-		updateRequest.done(function(itemData) {
-			if (itemData.completed) {
-			item.addClass('completed')
-			} else {
-				item.removeClass('completed')
-			}
-		})
+  var item = $(event.target).parent()
+  isItemCompleted = item.hasClass('completed')
+  var itemId = item.attr('data-id')
+
+  var updateRequest = $.ajax({
+    type: 'PUT',
+    url: "https://listalous.herokuapp.com/lists/YOUR-LIST-NAME-HERE/items/" + itemId,
+    data: { completed: !isItemCompleted }
+  })
+
+  updateRequest.done(function(itemData) {
+    if (itemData.completed) {
+      item.addClass('completed')
+    } else {
+      item.removeClass('completed')
+    }
+  })
 })
+
+
+
+
+
 
